@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Tools.Variables.Components
+namespace UnityTools.Runtime.Variables.Registerers
 {
     public class RegisterGameObject : MonoBehaviour
     {

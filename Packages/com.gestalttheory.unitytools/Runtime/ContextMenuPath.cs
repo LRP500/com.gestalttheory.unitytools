@@ -1,4 +1,4 @@
-namespace Tools
+namespace UnityTools.Runtime
 {
     public static class ContextMenuPath
     {

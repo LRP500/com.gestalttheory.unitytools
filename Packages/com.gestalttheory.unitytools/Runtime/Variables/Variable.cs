@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Tools.Variables
+namespace UnityTools.Runtime.Variables
 {
     public abstract class Variable<T> : ScriptableObject
     {
