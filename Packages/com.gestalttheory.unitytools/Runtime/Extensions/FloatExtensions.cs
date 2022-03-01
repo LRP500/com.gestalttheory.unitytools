@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tools.Extensions
+namespace UnityTools.Runtime.Extensions
 {
     /// <summary>
     /// Extension methods for UnityEngine.Float
@@ -33,15 +33,15 @@ namespace Tools.Extensions
         }
 
         /// <summary>
-        /// Remap value to another range.
+        /// Remap value from range A to range B.
         /// </summary>
         /// <param name="value"></param>
-        /// <param name="from1"></param>
-        /// <param name="to1"></param>
-        /// <param name="from2"></param>
-        /// <param name="to2"></param>
+        /// <param name="minA"></param>
+        /// <param name="maxA"></param>
+        /// <param name="minB"></param>
+        /// <param name="maxB"></param>
         /// <returns></returns>
-        public static float Convert(this float value, float minA, float maxA, float minB, float maxB)
+        public static float Remap(this float value, float minA, float maxA, float minB, float maxB)
         {
             float normal = Mathf.InverseLerp(minA, maxA, value);
             return Mathf.Lerp(minB, maxB, normal);

@@ -1,8 +1,10 @@
 {
-    "name": "UnityTools",
+    "name": "UnityTools.Runtime",
     "rootNamespace": "",
     "references": [
-        "GUID:560b04d1a97f54a4e82edc0cbbb69285"
+        "GUID:560b04d1a97f54a4e82edc0cbbb69285",
+        "GUID:1d2ac10fb07b9ac459a14cfab8028882",
+        "GUID:44381728f195eb940a220ba4d32f5c61"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

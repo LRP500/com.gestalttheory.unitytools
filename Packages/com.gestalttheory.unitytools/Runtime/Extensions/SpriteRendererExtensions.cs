@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tools.Extensions
+namespace UnityTools.Runtime.Extensions
 {
     public static class SpriteRendererExtensions
     {

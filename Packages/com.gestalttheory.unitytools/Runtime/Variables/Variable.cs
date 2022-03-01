@@ -10,5 +10,10 @@ namespace UnityTools.Runtime.Variables
         {
             Value = value;
         }
+        
+        public static implicit operator T(Variable<T> variable)
+        {
+            return variable.Value;
+        }
     }
 }

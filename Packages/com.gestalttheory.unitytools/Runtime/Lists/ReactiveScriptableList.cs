@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityTools.Runtime.Lists
 {
-    public abstract class ReactiveList<T> : ScriptableObject
+    public abstract class ReactiveScriptableList<T> : ScriptableObject
     {
         private readonly ReactiveCollection<T> _values = new();
         public IReadOnlyReactiveCollection<T> Values => _values;

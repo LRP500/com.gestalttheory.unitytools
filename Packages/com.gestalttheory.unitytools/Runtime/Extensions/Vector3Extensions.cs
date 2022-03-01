@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Tools.Extensions;
 using UnityEngine;
+using UnityTools.Runtime.Extensions;
 
-namespace Extensions
+namespace UnityTools.Runtime
 {
     /// <summary>
     /// Extension methods for UnityEngine.Vector3
@@ -22,11 +22,9 @@ namespace Extensions
             foreach (var otherPosition in otherPositions)
             {
                 var distance = (position - otherPosition).sqrMagnitude;
-                if (distance < shortestDistance)
-                {
-                    closest = otherPosition;
-                    shortestDistance = distance;
-                }
+                if (!(distance < shortestDistance)) continue;
+                closest = otherPosition;
+                shortestDistance = distance;
             }
             return closest;
         }
@@ -145,7 +143,7 @@ namespace Extensions
         /// <returns></returns>
         public static bool IsWorldPointVisible(this Vector3 worldPos, Camera camera)
         {
-            Vector3 screenPos = camera.WorldToScreenPoint(worldPos);
+            var screenPos = camera.WorldToScreenPoint(worldPos);
             return screenPos.IsScreenPointVisible();
         }
 

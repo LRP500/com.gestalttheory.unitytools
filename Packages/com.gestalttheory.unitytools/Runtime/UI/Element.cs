@@ -1,5 +1,6 @@
 ﻿using UniRx;
 using UnityEngine;
+using UnityTools.Runtime.Extensions;
 
 namespace UnityTools.Runtime.UI
 {
@@ -9,14 +10,20 @@ namespace UnityTools.Runtime.UI
 
         #region IUpdatable
 
-        public virtual void Initialize()
+        private void Awake()
         {
             Controller = GetComponent<T>();
-            Controller.OnRefresh.Subscribe(_ => Refresh());
+            Controller.OnInitialize.Subscribe(_ => OnInitialize()).AddTo(this);
+            Controller.OnRefresh.Subscribe(_ => OnRefresh()).AddTo(this);
+            Controller.OnVisibilityChanged.WhereTrue().Subscribe(_ => OnOpen()).AddTo(this);
+            Controller.OnVisibilityChanged.WhereFalse().Subscribe(_ => OnClose()).AddTo(this);
         }
-        
-        protected virtual void Refresh() { }
-        protected virtual void Clear() { }
+
+        protected virtual void OnInitialize() { }
+        protected virtual void OnRefresh() { }
+        protected virtual void OnClear() { }
+        protected virtual void OnOpen() { }
+        protected virtual void OnClose() { }
         
         #endregion IUpdatable
     }

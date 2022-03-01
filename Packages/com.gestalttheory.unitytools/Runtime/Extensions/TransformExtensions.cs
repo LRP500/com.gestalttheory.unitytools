@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Extensions
+namespace UnityTools.Runtime
 {
     /// <summary>
     /// Extension methods for UnityEngine.Transform
