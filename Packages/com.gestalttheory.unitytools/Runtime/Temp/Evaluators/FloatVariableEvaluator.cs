@@ -2,7 +2,7 @@
 
 namespace UnityTools.Runtime.Variables
 {
-    [CreateAssetMenu(menuName = ContextMenuPath.VariableEvaluators + "/Float")]
+    [System.Serializable]
     public class FloatVariableEvaluator : VariableEvaluator
     {
         [SerializeField]

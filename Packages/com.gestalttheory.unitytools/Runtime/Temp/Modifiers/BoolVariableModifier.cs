@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace UnityTools.Runtime.Variables
 {
-    [CreateAssetMenu(menuName = ContextMenuPath.VariableModifiers + "/Bool")]
+    [System.Serializable]
     public class BoolVariableModifier : VariableModifier
     {
         [SerializeField]
@@ -28,7 +27,7 @@ namespace UnityTools.Runtime.Variables
                 case BooleanOperator.Not:
                     _variable.SetValue(!_variable.Value); break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new System.ArgumentOutOfRangeException();
             }
         }
     }

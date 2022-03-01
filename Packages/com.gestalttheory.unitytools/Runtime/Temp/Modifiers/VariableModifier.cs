@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace UnityTools.Runtime.Variables
+﻿namespace UnityTools.Runtime.Variables
 {
     public enum NumericalOperator
     {
@@ -19,7 +17,7 @@ namespace UnityTools.Runtime.Variables
         Not
     }
     
-    public abstract class VariableModifier : ScriptableObject
+    public abstract class VariableModifier
     {
         public abstract void Modify();
     }

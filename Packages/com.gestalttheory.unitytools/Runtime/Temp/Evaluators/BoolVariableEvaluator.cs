@@ -2,7 +2,7 @@
 
 namespace UnityTools.Runtime.Variables
 {
-    [CreateAssetMenu(menuName = ContextMenuPath.VariableEvaluators + "/Bool")]
+    [System.Serializable]
     public class BoolVariableEvaluator : VariableEvaluator
     {
         [SerializeField]

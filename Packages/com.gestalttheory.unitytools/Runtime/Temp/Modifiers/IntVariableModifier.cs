@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace UnityTools.Runtime.Variables
 {
-    [CreateAssetMenu(menuName = ContextMenuPath.VariableModifiers + "/Int")]
+    [System.Serializable]
     public class IntVariableModifier : VariableModifier
     {
         [SerializeField]
@@ -30,7 +29,7 @@ namespace UnityTools.Runtime.Variables
                 case NumericalOperator.DivideBy:
                     _variable.DivideBy(_value); break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new System.ArgumentOutOfRangeException();
             }
         }
     }

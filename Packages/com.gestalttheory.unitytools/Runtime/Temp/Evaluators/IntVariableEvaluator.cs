@@ -2,7 +2,7 @@
 
 namespace UnityTools.Runtime.Variables
 {
-    [CreateAssetMenu(menuName = ContextMenuPath.VariableEvaluators + "/Int")]
+    [System.Serializable]
     public class IntVariableEvaluator : VariableEvaluator
     {
         [SerializeField]
