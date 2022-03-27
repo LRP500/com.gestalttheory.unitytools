@@ -5,6 +5,23 @@ namespace UnityTools.Runtime.Variables
 {
     public abstract class ReactiveVariable<T> : ScriptableObject
     {
-        public ReactiveProperty<T> Value { get; private set; } = new();
+        private readonly ReactiveProperty<T> _property = new();
+        public IReadOnlyReactiveProperty<T> Property => _property;
+
+        public void SetValue(T value, bool forceNotify = false)
+        {
+            if (forceNotify)
+            {
+                _property.SetValueAndForceNotify(value);
+                return;
+            }
+
+            _property.Value = value;
+        }
+        
+        public void Clear()
+        {
+            SetValue(default);
+        }
     }
 }

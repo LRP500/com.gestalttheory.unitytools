@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
@@ -21,7 +20,7 @@ namespace UnityTools.Runtime.Utilities
             {
                 var (key, value) = _abbrevations.ElementAt(i);
 
-                if (Math.Abs(number) >= key)
+                if (System.Math.Abs(number) >= key)
                 {
                     return (number / key).ToString(format) + value;
                 }

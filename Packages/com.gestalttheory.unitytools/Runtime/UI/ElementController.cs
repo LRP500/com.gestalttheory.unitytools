@@ -1,83 +1,53 @@
-﻿using System.Collections.Generic;
-using UniRx;
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityTools.Runtime.Extensions;
 
 namespace UnityTools.Runtime.UI
 {
-    public abstract class ElementController : MonoBehaviour, IHideable
+    public sealed class ElementController : MonoBehaviour
     {
-        public readonly ISubject<Unit> OnInitialize = new Subject<Unit>();
-        public readonly ISubject<Unit> OnRefresh = new Subject<Unit>();
-        public readonly ISubject<bool> OnVisibilityChanged = new Subject<bool>();
+        private enum DisplayMode
+        {
+            Self,
+            Canvas,
+            CanvasGroup,
+        }
 
         [SerializeField]
-        private List<ElementController> _children;
+        private DisplayMode _displayMode;
+        
+        [SerializeField]
+        [ShowIf("@ _displayMode == DisplayMode.Canvas")]
+        private Canvas _canvas;
 
         [SerializeField]
-        private bool _initializeOnAwake;
+        [ShowIf("@ _displayMode == DisplayMode.CanvasGroup")]
+        private CanvasGroup _canvasGroup;
 
-        private void Awake()
+        private void SetVisible(bool visible)
         {
-            if (_initializeOnAwake)
+            if (_displayMode == DisplayMode.Self)
             {
-                Initialize();
+                gameObject.SetActive(visible);
             }
-        }
-
-        public virtual void Initialize()
-        {
-            InitializeChildren();
-            OnInitialize.OnNext(Unit.Default);
-        }
-        
-        public virtual void Refresh()
-        {
-            RefreshChildren();
-            OnRefresh.OnNext(Unit.Default);
-        }
-        
-        private void InitializeChildren()
-        {
-            for (int i = 0, length = _children.Count; i < length; ++i)
+            else if (_displayMode == DisplayMode.Canvas)
             {
-                _children[i].Initialize();
+                _canvas.enabled = visible;
             }
-        }
-
-        private void RefreshChildren()
-        {
-            for (int i = 0, length = _children.Count; i < length; ++i)
+            else if (_displayMode == DisplayMode.CanvasGroup)
             {
-                _children[i].Refresh();
+                _canvasGroup.SetVisible(visible);
             }
-        }
-
-        protected virtual void Clear() { }
-        
-        #region IHideable
-
-        protected abstract void SetVisible(bool visible);
-
-        public void Toggle(bool opened)
-        {
-            if (opened) Show();
-            else Hide();
         }
 
         public void Show()
         {
-            OnVisibilityChanged.OnNext(true);
             SetVisible(true);
-            Refresh();
         }
 
         public void Hide()
         {
-            OnVisibilityChanged.OnNext(false);
             SetVisible(false);
-            Clear();
         }
-
-        #endregion IHideable
     }
 }

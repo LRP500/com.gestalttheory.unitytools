@@ -12,7 +12,9 @@ namespace UnityTools.Runtime.UI.Editor
         public override void OnInspectorGUI ()
         {
             serializedObject.Update();
+            GUI.enabled = false;
             EditorGUILayout.PropertyField(m_Script, Array.Empty<GUILayoutOption>());
+            GUI.enabled = true;
             RaycastControlsGUI();
             serializedObject.ApplyModifiedProperties();
         }

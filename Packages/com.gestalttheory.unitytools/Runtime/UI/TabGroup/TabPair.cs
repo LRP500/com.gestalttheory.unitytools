@@ -7,6 +7,6 @@ namespace UnityTools.Runtime.UI
     public class TabPair
     {
         public TabToggle tab;
-        public ElementController content;
+        public Element content;
     }
 }

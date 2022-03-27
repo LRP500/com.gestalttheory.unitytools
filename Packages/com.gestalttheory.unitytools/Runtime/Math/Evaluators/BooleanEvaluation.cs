@@ -1,12 +1,12 @@
-﻿namespace UnityTools.Runtime
+﻿namespace UnityTools.Runtime.Math
 {
     public enum BooleanEvaluation
     {
         EqualTo,
         NotEqualTo
     }
-    
-    public static class BooleanEvaluator
+
+    public static partial class MathExtensions
     {
         public static bool Evaluate(this bool valueA, BooleanEvaluation evaluation, bool valueB)
         {

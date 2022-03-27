@@ -19,5 +19,10 @@ namespace UnityTools.Runtime.Extensions
         {
             return source.Where(x => x.Equals(false));
         }
+
+        public static void AddTo(this IDisposable source, SerialDisposable disposable)
+        {
+            disposable.Disposable = source;
+        }
     }
 }

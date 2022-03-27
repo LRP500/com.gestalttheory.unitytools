@@ -36,14 +36,14 @@ namespace UnityTools.Runtime.UI
 
         #region Private Methods
 
-        private void Start()
+        private void Awake()
         {
             for (var i = 0; i < _tabPairs.Count; i++)
             {
                 var pair = GetPairAt(i);
                 pair?.tab.Toggle.onValueChanged
                     .AsObservable()
-                    .Where(x => x)
+                    .WhereTrue()
                     .Subscribe(_ => Select(pair));
             }
         }
@@ -61,7 +61,7 @@ namespace UnityTools.Runtime.UI
             var index = FindTabIndex(_firstSelectedTab) ?? 0;
             Select(index);
         }
-        
+
         /// <summary>
         /// Selects pair with given toggle reference
         /// </summary>
@@ -85,7 +85,11 @@ namespace UnityTools.Runtime.UI
         {
             var tab = GetPairAt(index);
 
-            if (tab?.content != null && tab.tab != null)
+            Debug.Assert(tab != null, "Invalid tab index");
+            Debug.Assert(tab.tab != null, "Tab toggle is null");
+            Debug.Assert(tab.content != null, "Tab content is null");
+            
+            if (tab.content != null && tab.tab != null)
             {
                 tab.content.Toggle(selected);
             }
@@ -123,14 +127,15 @@ namespace UnityTools.Runtime.UI
         #endregion Private Methods
 
         #region Public Methods
-        
+
         /// <summary>
         /// Selects tab at given index
         /// </summary>
         /// <param name="index"></param>
-        public void Select(int index)
+        /// <param name="forceRefresh"></param>
+        public void Select(int index, bool forceRefresh = false)
         {
-            if (_currentTabIndex == index) return;
+            if (_currentTabIndex == index && !forceRefresh) return;
 
             if (_currentTabIndex.HasValue)
             {

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityTools.Runtime.Math;
 
 namespace UnityTools.Runtime.Variables
 {
@@ -16,8 +17,7 @@ namespace UnityTools.Runtime.Variables
 
         public override bool Evaluate()
         {
-            var evaluator = new NumericalEvaluator<int>();
-            return evaluator.Evaluate(_target, _evaluation, _value);
+            return _target.Value.Evaluate(_evaluation, _value);
         }
     }
 }
