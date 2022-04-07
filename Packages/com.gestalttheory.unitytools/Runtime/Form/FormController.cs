@@ -7,7 +7,7 @@ using UnityTools.Runtime.ECA.Actions;
 
 namespace UnityTools.Runtime.Form
 {
-    public abstract class FormController<T> : MonoBehaviour, IDisposable where T : FormData
+    public abstract class FormController<T> : MonoBehaviour, IDisposable where T : FormData, new()
     {
         public readonly ISubject<bool> OnSubmit = new Subject<bool>();
         public readonly ISubject<Unit> OnRefresh = new Subject<Unit>();
@@ -23,7 +23,7 @@ namespace UnityTools.Runtime.Form
         
         public virtual void Initialize()
         {
-            Data = CreateForm();
+            Data = new T();
             Disposable = new CompositeDisposable();
             RegisterCallbacks();
             Refresh();
@@ -49,9 +49,9 @@ namespace UnityTools.Runtime.Form
             OnRefresh.OnNext(Unit.Default);
         }
    
-        protected void AddField(IFormField field)
+        protected void AddField(Selectable field)
         {
-            field.Target.OnSelectAsObservable()
+            field.OnSelectAsObservable()
                 .Subscribe(_ => Refresh())
                 .AddTo(Disposable);
         }
@@ -66,7 +66,5 @@ namespace UnityTools.Runtime.Form
         {
             Disposable?.Dispose();
         }
-
-        protected abstract T CreateForm();
     }
 }

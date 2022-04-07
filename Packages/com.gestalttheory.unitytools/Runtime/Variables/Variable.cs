@@ -4,11 +4,14 @@ namespace UnityTools.Runtime.Variables
 {
     public abstract class Variable<T> : ScriptableObject
     {
-        public T Value { get; private set; }
+        [SerializeField]
+        private T _value;
+
+        public T Value => _value;
 
         public void SetValue(T value)
         {
-            Value = value;
+            _value = value;
         }
         
         public static implicit operator T(Variable<T> variable)

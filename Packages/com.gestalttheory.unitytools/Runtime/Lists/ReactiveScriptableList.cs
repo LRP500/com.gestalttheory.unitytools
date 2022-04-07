@@ -1,4 +1,6 @@
-﻿using UniRx;
+﻿using System.Collections.Generic;
+using Sirenix.Utilities;
+using UniRx;
 using UnityEngine;
 
 namespace UnityTools.Runtime.Lists
@@ -13,6 +15,11 @@ namespace UnityTools.Runtime.Lists
             _values.Add(entity);
         }
 
+        public virtual void AddRange(IEnumerable<T> entities)
+        {
+            _values.AddRange(entities);
+        }
+        
         public virtual void Remove(T entity)
         {
             _values.Remove(entity);
