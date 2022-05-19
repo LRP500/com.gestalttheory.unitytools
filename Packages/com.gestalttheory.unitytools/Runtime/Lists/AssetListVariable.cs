@@ -1,33 +1,25 @@
 ﻿using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace UnityTools.Runtime.Lists
 {
-    public abstract class ScriptableList<T> : ScriptableObject where T : class
+    public abstract class AssetListVariable<T> : ScriptableObject where T : class
     {
+        [AssetList]
         [SerializeField]
         private List<T> _items;
 
         public IReadOnlyList<T> Items => _items;
 
-        public void Add(T item)
-        {
-            _items.Add(item);
-        }
-
-        public void Remove(T item)
-        {
-            _items.Remove(item);
-        }
-
         public T Get(int index)
         {
             return Items.Count > index ? Items[index] : null;
         }
-        
-        public void Clear()
+
+        public T GetRandom()
         {
-            _items.Clear();
+            return Items[Random.Range(0, Items.Count)];
         }
     }
 }

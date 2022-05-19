@@ -20,9 +20,23 @@ namespace UnityTools.Runtime.Extensions
             return source.Where(x => x.Equals(false));
         }
 
-        public static void AddTo(this IDisposable source, SerialDisposable disposable)
+        public static IObservable<T> WhereNull<T>(this IObservable<T> source)
         {
-            disposable.Disposable = source;
+            return source.Where(x => x == null);
+        }
+        
+        public static IObservable<T> WhereNotNull<T>(this IObservable<T> source)
+        {
+            return source.Where(x => x != null);
+        }
+        
+        public static IDisposable SubscribeTwoStates(this IObservable<bool> source, Action onTrue, Action onFalse)
+        {
+            return source.Subscribe(x =>
+            {
+                var action = x ? onTrue : onFalse;
+                action?.Invoke();
+            });
         }
     }
 }
