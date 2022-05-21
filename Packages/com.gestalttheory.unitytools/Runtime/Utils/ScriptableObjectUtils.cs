@@ -3,6 +3,8 @@ using UnityEngine;
 
 namespace UnityTools.Runtime.Utils
 {
+#if UNITY_EDITOR
+
     public static class ScriptableObjectUtils
     {
         public static T CreateSubAsset<T>(ScriptableObject source) where T : ScriptableObject
@@ -30,4 +32,6 @@ namespace UnityTools.Runtime.Utils
             AssetDatabase.SaveAssets();
         }
     }
+
+#endif
 }

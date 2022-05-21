@@ -13,6 +13,11 @@ namespace UnityTools.Runtime.Variables
         {
             _value = value;
         }
+
+        public void Clear()
+        {
+            _value = default;
+        }
         
         public static implicit operator T(Variable<T> variable)
         {

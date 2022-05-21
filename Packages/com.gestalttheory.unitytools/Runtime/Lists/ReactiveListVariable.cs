@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Sirenix.Utilities;
 using UniRx;
 using UnityEngine;
@@ -10,6 +11,8 @@ namespace UnityTools.Runtime.Lists
         private readonly ReactiveCollection<T> _values = new();
         public IReadOnlyReactiveCollection<T> Values => _values;
 
+        public int Count => _values.Count();
+        
         public virtual void Add(T entity)
         {
             _values.Add(entity);
