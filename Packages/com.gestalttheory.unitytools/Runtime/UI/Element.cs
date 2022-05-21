@@ -9,6 +9,9 @@ namespace UnityTools.Runtime.UI
         [SerializeField]
         private bool _initializeOnAwake;
         
+        [SerializeField]
+        private bool _showOnStart;
+
         private ElementController _controller;
 
         private ElementController Controller {
@@ -26,6 +29,14 @@ namespace UnityTools.Runtime.UI
             }
         }
 
+        private void Start()
+        {
+            if (_showOnStart)
+            {
+                Show();
+            }
+        }
+        
         public void Show()
         {
             Controller.Show();

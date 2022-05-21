@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityTools.Runtime.Lists
 {
-    public abstract class ListVariable<T> : ScriptableObject where T : class
+    public abstract class ListVariable<T> : ScriptableObject
     {
         [SerializeField]
         private List<T> _items;
@@ -22,7 +22,7 @@ namespace UnityTools.Runtime.Lists
 
         public T Get(int index)
         {
-            return Items.Count > index ? Items[index] : null;
+            return Items.Count > index ? Items[index] : default;
         }
         
         public void Clear()
