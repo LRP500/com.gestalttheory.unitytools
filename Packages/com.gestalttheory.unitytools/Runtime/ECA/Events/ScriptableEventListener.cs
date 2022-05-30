@@ -12,13 +12,13 @@ namespace UnityTools.Runtime.ECA.Events
         private ScriptableEvent _event;
         
         [SerializeField]
-        private UnityEvent _response;
-
-        [SerializeField]
         private List<ScriptableCondition> _conditions;
 
         [SerializeField]
         private List<ScriptableAction> _actions;
+        
+        [SerializeField]
+        private UnityEvent _response;
 
         private void OnEnable()
         {

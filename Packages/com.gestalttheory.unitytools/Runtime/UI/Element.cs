@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace UnityTools.Runtime.UI
 {
@@ -7,11 +8,12 @@ namespace UnityTools.Runtime.UI
     public abstract class Element : MonoBehaviour, IDisposable
     {
         [SerializeField]
-        private bool _initializeOnAwake;
+        [FormerlySerializedAs("_initializeOnAwake")]
+        private bool _initializeOnStart;
         
         [SerializeField]
-        private bool _showOnStart;
-
+        private bool _hideOnStart;
+        
         private ElementController _controller;
 
         private ElementController Controller {
@@ -21,20 +23,11 @@ namespace UnityTools.Runtime.UI
             }
         }
 
-        private void Awake()
-        {
-            if (_initializeOnAwake)
-            {
-                Initialize();
-            }
-        }
-
         private void Start()
         {
-            if (_showOnStart)
-            {
-                Show();
-            }
+            if (_initializeOnStart) Initialize();
+            if (_hideOnStart) Hide();
+            else Show();
         }
         
         public void Show()

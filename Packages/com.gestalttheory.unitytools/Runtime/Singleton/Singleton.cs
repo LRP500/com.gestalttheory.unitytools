@@ -10,15 +10,29 @@ namespace UnityTools.Runtime
         {
             get
             {
-                _current ??= FindObjectOfType<T>();
-                
-                if (_current != null)
-                    return _current;
+                if (_current != null) return _current;
+
+                _current = FindObjectOfType<T>();
+
+                if (_current != null) return _current;
                 
                 var obj = new GameObject(typeof(T).Name);
                 _current = obj.AddComponent<T>();
                 return _current;
             }
+        }
+        
+        protected virtual void Awake()
+        {
+            if (_current != null && _current != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            _current = this as T;
+            
+            DontDestroyOnLoad(gameObject);
         }
     }
 }

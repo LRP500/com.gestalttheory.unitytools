@@ -8,6 +8,8 @@ namespace UnityTools.Runtime.Variables
         private readonly ReactiveProperty<T> _property = new();
         public IReadOnlyReactiveProperty<T> Property => _property;
 
+        public T Value => _property.Value;
+        
         public void SetValue(T value, bool forceNotify = false)
         {
             if (forceNotify)

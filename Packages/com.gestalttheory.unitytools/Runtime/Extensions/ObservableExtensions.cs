@@ -10,6 +10,11 @@ namespace UnityTools.Runtime.Extensions
             return source.Skip(1);
         }
 
+        public static IObservable<T> TakeFirst<T>(this IObservable<T> source)
+        {
+            return source.Take(1);
+        }
+        
         public static IObservable<bool> WhereTrue(this IObservable<bool> source)
         {
             return source.Where(x => x.Equals(true));

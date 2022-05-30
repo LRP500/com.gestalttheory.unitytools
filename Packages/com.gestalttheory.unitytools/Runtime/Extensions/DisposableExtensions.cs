@@ -7,11 +7,6 @@ namespace Extensions
 {
     public static class DisposableExtensions
     {
-        public static void AddTo(this IDisposable source, SerialDisposable disposable)
-        {
-            disposable.Disposable = source;
-        }
-
         public static void AddToDisable(this IDisposable source, Component target)
         {
             source.AddTo(target.gameObject);
