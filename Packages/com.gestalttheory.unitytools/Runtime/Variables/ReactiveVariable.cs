@@ -10,7 +10,7 @@ namespace UnityTools.Runtime.Variables
 
         public T Value => _property.Value;
         
-        public void SetValue(T value, bool forceNotify = false)
+        public void SetValue(T value, bool forceNotify)
         {
             if (forceNotify)
             {
@@ -18,6 +18,11 @@ namespace UnityTools.Runtime.Variables
                 return;
             }
 
+            SetValue(value);
+        }
+        
+        public void SetValue(T value)
+        {
             _property.Value = value;
         }
         

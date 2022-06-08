@@ -2,7 +2,7 @@
 
 namespace UnityTools.Runtime.Variables
 {
-    [CreateAssetMenu(menuName = ContextMenuPath.Variables + "/Float")]
+    [CreateAssetMenu(menuName = ContextMenuPath.Variables + "Float")]
     public class FloatVariable : Variable<float>
     {
         public void Add(float value)

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace UnityTools.Runtime.ECA.Events
 {
-    [CreateAssetMenu(menuName = ContextMenuPath.ECA + "/Event")]
+    [CreateAssetMenu(menuName = ContextMenuPath.ECA + "Event")]
     public class ScriptableEvent : ScriptableObject
     {
         private List<ScriptableEventListener> _listeners = new ();

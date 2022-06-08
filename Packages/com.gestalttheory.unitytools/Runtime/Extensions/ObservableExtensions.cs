@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Threading;
 using UniRx;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace UnityTools.Runtime.Extensions
 {
@@ -43,5 +47,43 @@ namespace UnityTools.Runtime.Extensions
                 action?.Invoke();
             });
         }
+
+        public static IObservable<bool> OnToggleOn(this Toggle toggle)
+        {
+            return Observable.CreateWithState<bool, Toggle>(toggle, (t, observer) => t.onValueChanged
+                .AsObservable()
+                .WhereTrue()
+                .Subscribe(observer));
+        }
+        
+        #region AsyncOperation
+
+        public static IObservable<float> ToObservable(this AsyncOperation asyncOperation)
+        {
+            if (asyncOperation == null) throw new ArgumentNullException(nameof(asyncOperation));
+            
+            return Observable.FromCoroutine<float>((observer, cancellationToken) => 
+                RunAsyncOperation(asyncOperation, observer, cancellationToken));
+        }
+        
+        private static IEnumerator RunAsyncOperation(
+            AsyncOperation asyncOperation,
+            IObserver<float> observer,
+            CancellationToken cancellationToken)
+        {
+            while (!asyncOperation.isDone && !cancellationToken.IsCancellationRequested)
+            {
+                observer.OnNext(asyncOperation.progress);
+                yield return null;
+            }
+
+            if (cancellationToken.IsCancellationRequested)
+                yield break;
+            
+            observer.OnNext(asyncOperation.progress);
+            observer.OnCompleted();
+        }
+
+        #endregion AsyncOperation
     }
 }

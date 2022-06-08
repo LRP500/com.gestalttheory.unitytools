@@ -17,7 +17,6 @@ namespace Extensions
         
         public static void Clear(this SerialDisposable source)
         {
-            source.Disposable?.Dispose();
             source.Disposable = null;
         }
     }

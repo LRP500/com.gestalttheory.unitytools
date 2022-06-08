@@ -2,7 +2,7 @@
 
 namespace UnityTools.Runtime.Variables
 {
-    [CreateAssetMenu(menuName = ContextMenuPath.Variables + "/Int")]
+    [CreateAssetMenu(menuName = ContextMenuPath.Variables + "Int")]
     public class IntVariable : Variable<int>
     {
         public void Increment()

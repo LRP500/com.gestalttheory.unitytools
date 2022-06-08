@@ -10,7 +10,7 @@ namespace UnityTools.Runtime.Variables
     /// Register runtime component of type T to a ScriptableObject Reactive Variable.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class RegisterReactiveComponent<T> : MonoBehaviour where T : Object
+    public abstract class RegisterReactiveComponent<T> : MonoBehaviour where T : Behaviour
     {
         [SerializeField]
         private RegisterMode _mode;

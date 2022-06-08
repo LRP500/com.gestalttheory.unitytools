@@ -1,32 +1,28 @@
-﻿using Sirenix.OdinInspector;
+using Sirenix.OdinInspector;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using UnityTools.Runtime.Lists;
 
-namespace UnityTools.Runtime.Variables
+namespace UnityTools.Runtime.Variables.Registerers
 {
-    /// <summary>
-    /// Register runtime component of type T to a ScriptableObject Variable.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public abstract class RegisterComponent<T> : MonoBehaviour where T : Behaviour
+    public class RegisterTransform : MonoBehaviour
     {
         [SerializeField]
         private RegisterMode _mode;
         
         [SerializeReference]
         [ShowIf("@ _mode == RegisterMode.Single")]
-        private Variable<T> _runtimeReference;
+        private TransformVariable _runtimeReference;
 
         [SerializeReference]
         [ShowIf("@ _mode == RegisterMode.List")]
-        private ListVariable<T> _runtimeList;
+        private TransformListVariable _runtimeList;
         
         [SerializeField]
         private bool _clearOnDestroy;
         
-        private T _component;
+        private Transform _component;
         
         private void Awake()
         {
@@ -41,7 +37,7 @@ namespace UnityTools.Runtime.Variables
 
         private void Register()
         {
-            _component = GetComponent();
+            _component = transform;
             
             if (_mode == RegisterMode.Single)
             {
@@ -63,11 +59,6 @@ namespace UnityTools.Runtime.Variables
             {
                 _runtimeList.Remove(_component);
             }
-        }
-        
-        protected virtual T GetComponent()
-        {
-            return GetComponent<T>();
         }
     }
 }

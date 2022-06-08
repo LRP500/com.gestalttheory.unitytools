@@ -4,6 +4,9 @@ namespace UnityTools.Runtime
 {
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
+        [SerializeField]
+        private bool _dontDestroyOnLoad = true;
+        
         private static T _current;
         
         public static T Current
@@ -31,8 +34,11 @@ namespace UnityTools.Runtime
             }
 
             _current = this as T;
-            
-            DontDestroyOnLoad(gameObject);
+
+            if (_dontDestroyOnLoad)
+            {
+                DontDestroyOnLoad(gameObject);
+            }
         }
     }
 }
