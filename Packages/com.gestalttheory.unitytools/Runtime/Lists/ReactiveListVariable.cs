@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Sirenix.Utilities;
+using Extensions;
 using UniRx;
 using UnityEngine;
 
@@ -7,29 +7,12 @@ namespace UnityTools.Runtime.Lists
 {
     public abstract class ReactiveListVariable<T> : ScriptableObject
     {
-        private readonly ReactiveCollection<T> _values = new();
-        public IReadOnlyReactiveCollection<T> Values => _values;
+        public ReactiveCollection<T> Values { get; }= new();
 
-        public int Count => _values.Count;
-        
-        public virtual void Add(T entity)
+        public void SetValues(IEnumerable<T> values)
         {
-            _values.Add(entity);
-        }
-
-        public virtual void AddRange(IEnumerable<T> entities)
-        {
-            _values.AddRange(entities);
-        }
-        
-        public virtual void Remove(T entity)
-        {
-            _values.Remove(entity);
-        }
-        
-        public virtual void Clear()
-        {
-            _values.Clear();
+            Values.Clear();
+            Values.AddRange(values);
         }
     }
 }

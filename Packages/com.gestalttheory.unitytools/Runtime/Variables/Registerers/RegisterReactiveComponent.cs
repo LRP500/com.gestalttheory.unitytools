@@ -49,7 +49,7 @@ namespace UnityTools.Runtime.Variables
             }
             else if (_mode == RegisterMode.List)
             {
-                _runtimeList.Add(_component);
+                _runtimeList.Values.Add(_component);
             }
         }
         
@@ -61,7 +61,7 @@ namespace UnityTools.Runtime.Variables
             }
             else if (_mode == RegisterMode.List)
             {
-                _runtimeList.Remove(_component);
+                _runtimeList.Values.Remove(_component);
             }
         }
         

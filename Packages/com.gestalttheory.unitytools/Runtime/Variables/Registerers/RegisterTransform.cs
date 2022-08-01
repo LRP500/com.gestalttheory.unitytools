@@ -20,7 +20,7 @@ namespace UnityTools.Runtime.Variables.Registerers
         private TransformListVariable _runtimeList;
         
         [SerializeField]
-        private bool _clearOnDestroy;
+        private bool _clearOnDestroy = true;
         
         private Transform _component;
         

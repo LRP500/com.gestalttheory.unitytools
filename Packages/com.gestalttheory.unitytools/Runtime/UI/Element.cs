@@ -1,14 +1,13 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.EventSystems;
 
 namespace UnityTools.Runtime.UI
 {
     [RequireComponent(typeof(ElementController))]
-    public abstract class Element : MonoBehaviour, IDisposable
+    public abstract class Element : UIBehaviour, IDisposable
     {
         [SerializeField]
-        [FormerlySerializedAs("_initializeOnAwake")]
         private bool _initializeOnStart;
         
         [SerializeField]
@@ -23,7 +22,7 @@ namespace UnityTools.Runtime.UI
             }
         }
 
-        private void Start()
+        protected override void Start()
         {
             if (_initializeOnStart) Initialize();
             if (_hideOnStart) Hide();
@@ -43,6 +42,11 @@ namespace UnityTools.Runtime.UI
             OnHide();
         }
 
+        public void Toggle()
+        {
+            Toggle(!Controller.IsVisible.Value);
+        }
+        
         public void Toggle(bool visible)
         {
             if (visible) Show();
@@ -51,7 +55,7 @@ namespace UnityTools.Runtime.UI
         
         public virtual void Initialize() { }
         public virtual void Refresh() { }
-        public virtual void Clear() { }
+        public virtual void ClearViews() { }
 
         protected virtual void OnShow() { }
         protected virtual void OnHide() { }

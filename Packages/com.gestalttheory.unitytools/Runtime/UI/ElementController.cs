@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using UniRx;
 using UnityEngine;
 using UnityTools.Runtime.Extensions;
 
@@ -24,6 +25,9 @@ namespace UnityTools.Runtime.UI
         [ShowIf("@ _displayMode == DisplayMode.CanvasGroup")]
         private CanvasGroup _canvasGroup;
 
+        private readonly BoolReactiveProperty _isVisible = new ();
+        public IReadOnlyReactiveProperty<bool> IsVisible => _isVisible;
+
         private void SetVisible(bool visible)
         {
             if (_displayMode == DisplayMode.Self)
@@ -38,6 +42,8 @@ namespace UnityTools.Runtime.UI
             {
                 _canvasGroup.SetVisible(visible);
             }
+
+            _isVisible.Value = visible;
         }
 
         public void Show()

@@ -3,7 +3,7 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
-namespace Extensions
+namespace UnityTools.Runtime.Extensions
 {
     public static class DisposableExtensions
     {

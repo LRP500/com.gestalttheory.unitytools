@@ -9,7 +9,7 @@ namespace UnityTools.Runtime.ECA.Actions
             return CanExecute() && ExecuteBehaviour();
         }
 
-        protected virtual bool CanExecute() => true;
+        public virtual bool CanExecute() => true;
         protected abstract bool ExecuteBehaviour();
     }
     

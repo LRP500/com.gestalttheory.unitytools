@@ -1,3 +1,4 @@
+using System;
 using UniRx;
 using UnityEngine;
 
@@ -5,7 +6,9 @@ namespace UnityTools.Runtime.Variables
 {
     public abstract class ReactiveVariable<T> : ScriptableObject
     {
+        [InspectorDisplay]
         private readonly ReactiveProperty<T> _property = new();
+        
         public IReadOnlyReactiveProperty<T> Property => _property;
 
         public T Value => _property.Value;
@@ -29,6 +32,11 @@ namespace UnityTools.Runtime.Variables
         public void Clear()
         {
             SetValue(default);
+        }
+
+        public IObservable<T> ObserveValueChanged()
+        {
+            return Property;
         }
     }
 }
