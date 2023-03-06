@@ -4,6 +4,6 @@ namespace UnityTools.Runtime.ECA.Conditions
 {
     public abstract class ScriptableCondition : ScriptableObject
     {
-        public abstract bool Check();
+        public abstract bool Evaluate();
     }
 }

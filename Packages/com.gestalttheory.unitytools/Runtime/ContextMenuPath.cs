@@ -8,7 +8,9 @@ namespace UnityTools.Runtime
         public const string Collections = Root + "Collections/";
         public const string ReactiveCollections = Collections + "Reactive/";
         public const string ECA = Root + "ECA/";
-        public const string Navigation = Root + "/Navigation/";
+        public const string Conditions = ECA + "Conditions/";
+        public const string Navigation = Root + "Navigation/";
         public const string Time = Root + "Time/";
+        public const string Audio = Root + "Audio/"
     }
 }

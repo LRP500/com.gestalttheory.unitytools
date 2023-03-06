@@ -39,6 +39,10 @@ namespace UnityTools.Runtime
             {
                 DontDestroyOnLoad(gameObject);
             }
+            
+            Initialize();
         }
+
+        protected virtual void Initialize() { }
     }
 }
