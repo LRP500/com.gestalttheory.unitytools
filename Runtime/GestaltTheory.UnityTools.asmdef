@@ -2,7 +2,8 @@
     "name": "GestaltTheory.UnityTools",
     "rootNamespace": "",
     "references": [
-        "GUID:560b04d1a97f54a4e82edc0cbbb69285"
+        "GUID:560b04d1a97f54a4e82edc0cbbb69285",
+        "GUID:4307f53044263cf4b835bd812fc161a4"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
