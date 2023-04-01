@@ -1,0 +1,9 @@
+{
+    "name": "com.gestalttheory.unitytools",
+    "displayName": "Unity Tools",
+    "description": "Collection of reusable tools and systems for Unity game development",
+    "version": "1.0.0",
+    "author": {
+        "name": "Pierre Roy"
+    }
+}
