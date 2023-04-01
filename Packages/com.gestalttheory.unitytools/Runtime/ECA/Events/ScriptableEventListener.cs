@@ -42,7 +42,7 @@ namespace UnityTools.Runtime.ECA.Events
         {
             for (int i = 0, length = _conditions.Count; i < length; ++i)
             {
-                if (!_conditions[i].Check())
+                if (!_conditions[i].Evaluate())
                 {
                     return false;
                 }

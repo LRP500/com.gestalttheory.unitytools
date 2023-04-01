@@ -1,15 +1,16 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using Sirenix.OdinInspector;
 using UniRx;
 using UnityEngine;
-using UnityTools.Runtime.Variables;
 
 namespace UnityTools.Runtime.Time
 {
     public class TimeManager : Singleton<TimeManager>
     {
-        public static ISubject<float> OnUpdateTick = new Subject<float>();
-        
+        private static readonly ISubject<float> _onUpdateTick = new Subject<float>();
+        public static IObservable<float> OnUpdateTick => _onUpdateTick;
+
         [SerializeField]
         private bool _live = true;
 
@@ -20,12 +21,6 @@ namespace UnityTools.Runtime.Time
         [SerializeField]
         [EnableIf(nameof(_live))]
         private bool _unscaledTick;
-
-        [SerializeField]
-        private BoolReactiveVariable _gamePaused;
-
-        [SerializeField]
-        private TimeManagerVariable _runtimeReference;
         
         [Header("Current State")]
 
@@ -44,24 +39,19 @@ namespace UnityTools.Runtime.Time
         private float _lastFrameTime;
         private float _lastTickTime;
         private float _timer;
-
+        
+        private readonly BoolReactiveProperty _gamePaused = new();
+        public IReadOnlyReactiveProperty<bool> GamePaused => _gamePaused;
+        
         public float SpeedMultiplier { get; private set; } = 1;
 
-        public IReadOnlyReactiveProperty<bool> GamePaused => _gamePaused.Property;
-        
-        protected override void Awake()
-        {
-            base.Awake();
-            Initialize();
-        }
-
-        private void Initialize()
+        protected override void Initialize()
         {
             SetSpeedMultiplier(1);
             _timer = _tickInterval;
             _lastTickTime = GetTime();
             _lastFrameTime = GetTime();
-            _runtimeReference.SetValue(this);
+            _gamePaused.Value = false;
         }
         
         protected virtual void Update()
@@ -71,7 +61,7 @@ namespace UnityTools.Runtime.Time
                 _frameDelta = GetTime() - _lastFrameTime;
                 _lastFrameTime = GetTime();
 
-                if (_gamePaused == false)
+                if (_gamePaused.Value == false)
                 {
                     _timer += _frameDelta * SpeedMultiplier;
                     if (_timer >= _tickInterval)
@@ -86,30 +76,25 @@ namespace UnityTools.Runtime.Time
             _speedMultiplier = SpeedMultiplier.ToString(CultureInfo.InvariantCulture);
         }
 
-        protected virtual void OnDestroy()
-        {
-            OnUpdateTick = null;
-        }
-
         protected virtual void TickUpdate()
         {
-            float currentTime = GetTime();
+            var currentTime = GetTime();
             _tickDelta = currentTime - _lastTickTime;
             _lastTickTime = currentTime;
             
-            OnUpdateTick.OnNext(_tickDelta);
+            _onUpdateTick.OnNext(_tickDelta);
         }
 
         public virtual void Pause()
         {
             UnityEngine.Time.timeScale = 0;
-            _gamePaused.SetValue(true);
+            _gamePaused.Value = true;
         }
 
         public virtual void Resume()
         {
             UnityEngine.Time.timeScale = SpeedMultiplier;
-            _gamePaused.SetValue(false);
+            _gamePaused.Value = false;
         }
 
         public void TogglePause()

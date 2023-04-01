@@ -11,6 +11,6 @@ namespace UnityTools.Runtime
         public const string Conditions = ECA + "Conditions/";
         public const string Navigation = Root + "Navigation/";
         public const string Time = Root + "Time/";
-        public const string Audio = Root + "Audio/"
+        public const string Audio = Root + "Audio/";
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityTools.Runtime.Lists
 {
-    public abstract class ListVariable<T> : ScriptableObject, IListVariable
+    public abstract class ListVariable<T> : ScriptableObject
     {
         [SerializeField]
         private List<T> _items;

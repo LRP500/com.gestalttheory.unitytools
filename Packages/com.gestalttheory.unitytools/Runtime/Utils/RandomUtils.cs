@@ -17,7 +17,7 @@ namespace UnityTools.Runtime.Utils
         /// Flip a coin.
         /// </summary>
         /// <returns></returns>
-        public static bool Chance()
+        public static bool CoinFlip()
         {
             return Random.Range(0, 2) == 0;
         }

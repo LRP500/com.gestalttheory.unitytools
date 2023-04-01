@@ -5,7 +5,7 @@ namespace UnityTools.Runtime
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         [SerializeField]
-        private bool _dontDestroyOnLoad = true;
+        private bool _dontDestroyOnLoad;
         
         private static T _current;
         
