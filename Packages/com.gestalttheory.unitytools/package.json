@@ -3,7 +3,6 @@
     "displayName": "Unity Tools",
     "description": "Collection of reusable tools and systems for Unity game development",
     "version": "1.0.0",
-    "unity": "2021.2",
     "author": {
         "name": "Pierre Roy"
     }
